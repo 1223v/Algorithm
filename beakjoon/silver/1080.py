@@ -15,7 +15,7 @@ def check(x,y):
 
 result = 0
 
-if( n < 3 or m <3 ) and AL != BL:
+if( n < 3 or m <3) and AL != BL:
     result = -1
 
 else:
