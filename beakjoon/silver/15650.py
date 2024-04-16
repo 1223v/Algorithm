@@ -8,6 +8,8 @@ s = []
 def dfs(start):
     if M == len(s):
         print(' '.join(map(str,s)))
+        return
+
 
     for i in range(start, N+1):
         if visited[i] == True:
