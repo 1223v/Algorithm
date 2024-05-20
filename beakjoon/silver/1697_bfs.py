@@ -1,6 +1,7 @@
 from collections import deque
 import sys
 
+
 def bfs():
     queue = deque()
     queue.append(n)
