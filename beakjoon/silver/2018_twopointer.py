@@ -10,7 +10,7 @@ sum = 1
 
 while end_index != n:
     if sum == n:
-        print(sum, n)
+
         count += 1
         end_index += 1
         sum += end_index
@@ -22,4 +22,4 @@ while end_index != n:
         end_index += 1
         sum += end_index
 
-print(count, sum)
+print(count)
