@@ -5,5 +5,5 @@ def sol(arr):
     return 0 if most_common_value == min(arr) else most_common_value
 
 
-a = [3,1,4,1,5]
+a = [7,1,2,8,2]
 print(sol(a))
