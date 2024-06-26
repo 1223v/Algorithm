@@ -1,39 +1,34 @@
 import sys
-sys.setrecursionlimit(10**5)
+from collections import deque
 input = sys.stdin.readline
 
-n,m = map(int,input().split())
-visited = [False] * (n+1)
-A = [[] for _ in range(n+1)]
+N,M = map(int,input().split())
+A = [[] for _ in range(N)]
+visited = [False] * N
 arrive = False
 
-def DFS(v, depth):
-    global arrive
+for _ in range(M):
+    u,v = map(int,input().split())
+    A[u].append(v)
+    A[v].append(u)
 
+def dfs(v,depth):
+    global arrive
     if depth == 5:
         arrive = True
         return
-
     else:
         visited[v] = True
         for i in A[v]:
             if not visited[i]:
-                DFS(i, depth+1)
+                dfs(i, depth+1)
+        visited[v] = False
 
-    visited[v] = False
-
-for _ in range(m):
-    s,e = map(int, input().split())
-    A[s].append(e)
-    A[e].append(s)
-
-
-for i in range(n):
-    DFS(i,1) # 시작 조건 유심히 파악할 것! => 깊이는 본인제외 다음 깊이부터 시작이니 0이 아닌 1
+for i in range(N):
+    dfs(i,1)
     if arrive:
+        print(1)
         break
 
-if arrive:
-    print(1)
-else:
+if not arrive:
     print(0)
