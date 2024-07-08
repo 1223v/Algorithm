@@ -19,7 +19,7 @@ def dfs(v):
         dp[v][0] = 0
 
     else:
-        dp[v][1] += 1
+        dp[v][1] += 1 # 매우 중요
         for i in A[v]:
             if not visited[i]:
                 dfs(i)
