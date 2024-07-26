@@ -12,6 +12,6 @@ for i in range(2, int(math.sqrt(N))+1):
             N /= i
 
 if N > 1:
-    result -= result /N
+    result -= result / N
 
 print(int(result))
