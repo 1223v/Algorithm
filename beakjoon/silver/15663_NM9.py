@@ -1,22 +1,27 @@
 import sys
 input = sys.stdin.readline
 
-n,m = map(int,input().split())
-A = list(map(int,input().split()))
+n,m = map(int, input().split())
+A = list(map(int, input().split()))
 visited = [False] * n
 s = []
-
-setA = sorted(set(A))
+A.sort()
 
 def dfs():
     if len(s) == m:
         print(' '.join(map(str,s)))
         return
 
-    for i in range(len(setA)):
-        if not visited[i]:
-            s.append(setA[i])
+    prev = 0
+    for i in range(n):
+        if not visited[i] and prev != A[i]:
+            visited[i] = True
+            s.append(A[i])
+            prev = A[i]
             dfs()
             s.pop()
+            visited[i] = False
+
+
 
 dfs()
