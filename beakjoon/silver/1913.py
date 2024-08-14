@@ -3,40 +3,27 @@ input = sys.stdin.readline
 
 n = int(input())
 m = int(input())
-dx = [1,-1,0,0]
-dy = [0,0,1,-1]
+di = [1,0,-1,0]
+dj = [0,1,0,-1]
+arr = [[0]*n for _ in range(n)]
 
-graph=[[0]* n for _ in range(n)]
-number = 2
-x = n//2
-y = n//2
-graph[x][y] =1
-repeat = 1
-i = 0
+i,j,cnt,dr = 0, 0, n*n, 0
+arr[i][j] = cnt
+result = [i+1,j+1]
+cnt -= 1
+while cnt >= 1:
+    ni,nj= i + di[dr], j + dj[dr]
+    if 0 <= ni < n and 0 <= nj < n and arr[ni][nj] == 0:
+        i,j = ni ,nj
+        arr[i][j] = cnt
+        if arr[i][j] == m:
+            result = [i+1, j+1]
+        cnt -= 1
 
-answer = [x+1, y+1]
-while x != 0 or y != 0:
-    flag = 0
-    for _ in range(2):
-        for _ in range(repeat):
-            x += dx[i]
-            y += dy[i]
-            graph[x][y] = number
+    else:
+        dr = (dr + 1) % 4
 
-            if number == m:
-                answer = [x+1, y+1]
-
-            if x == 0 and y == 0:
-                flag = 1
-                break
-
-            number += 1
-        if flag == 1:
-            break
-        i = (i+1) % 4
-    repeat += 1
-
-for i in graph:
+for i in arr:
     print(*i)
 
-print(*answer)
+print(*result)
