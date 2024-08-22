@@ -37,4 +37,4 @@ for i in range(1,n+1):
         result.append(i)
 
 print(*result)
-print(*answer)
+
