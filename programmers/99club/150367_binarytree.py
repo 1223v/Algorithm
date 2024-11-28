@@ -1,5 +1,6 @@
 # 다시 풀어볼 문제
 # https://school.programmers.co.kr/learn/courses/30/lessons/150367
+# https://velog.io/@ggb05224/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%ED%91%9C%ED%98%84-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%9D%B4%EC%A7%84%ED%8A%B8%EB%A6%AC-python
 def dfs(b, i, depth):
     if depth == 0: # 리프 노드에 도달했다면
         return True # 포화 이진트리
