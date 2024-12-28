@@ -22,10 +22,13 @@ def dijkstra():
             continue
 
         for next_node,cost in graph[now]:
+
+            # K 사용 안함으로 인해 비용 추가
             if visited[next_node][dp_k] > dist+cost:
                 visited[next_node][dp_k] = dist+cost
                 heapq.heappush(hq, (dist+cost,next_node,dp_k))
 
+            # K 사용으로 인해 비용 제거
             if dp_k> 0 and visited[next_node][dp_k-1] > dist:
                 visited[next_node][dp_k-1] = dist
                 heapq.heappush(hq, (dist, next_node, dp_k-1))
