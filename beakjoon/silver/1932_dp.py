@@ -16,7 +16,7 @@ for i in range(1,N):
 
             dp[i][j] = dp[i-1][j-1] + num_lst[i][j]
 
-        if len(dp[i-1]) > j and j >= 0:
+        if len(dp[i-1]) > j >= 0:
             dp[i][j] = max(dp[i][j],dp[i-1][j] + num_lst[i][j])
 
 
