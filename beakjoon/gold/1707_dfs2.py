@@ -40,8 +40,3 @@ for _ in range(TC):
 
     else:
         print("NO")
-
-
-
-
-
