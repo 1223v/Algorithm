@@ -1,27 +1,32 @@
 import sys
-
 input = sys.stdin.readline
-n = int(input())
-A = list(map(int, input().split()))
-count = 0
-A.sort()
 
-for k in range(n):
-    find = A[k]
-    start_index = 0
-    end_index = n-1
-    while start_index < end_index:
-        if A[start_index] + A[end_index] < find:
-            start_index += 1
-        elif A[start_index] + A[end_index] > find:
-            end_index -= 1
+N = int(input())
+s = sorted(list(map(int,input().split())))
+
+count = 0
+for i in range(N):
+    start = 0
+    end = N-1
+    target = s[i]
+
+    while start < end:
+
+        if s[start] + s[end] < target:
+            start += 1
+
+        elif s[start] + s[end] > target:
+            end -= 1
+
         else:
-            if start_index != k and end_index != k:
+            if start != i and end != i: # 서로 다 다른수여야 좋은수
                 count += 1
                 break
-            elif start_index == k:
-                start_index += 1
-            elif end_index == k:
-                end_index -= 1
+
+            elif start == i:
+                start += 1
+
+            elif end == i:
+                end -= 1
 
 print(count)
