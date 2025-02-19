@@ -1,70 +1,29 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
+TC = int(input())
 
-for _ in range(N):
+for _ in range(TC):
     s = input().rstrip()
-    chk = 0
-    chk2 = 0
-    if s == s[::-1]:
-        print(0)
-    # 짝수
-    elif len(s) % 2 == 0:
-        start = 0
-        end = len(s)-1
-        while start <= end:
-
-            if s[start] != s[end]:
-                if s[start+1] == s[end]:
-                    end -= 1
-                    start += 2
-                    chk += 1
-
-                elif s[start] == s[end+1]:
-                    end -= 2
-                    start += 1
-                    chk += 1
-                else:
-                    chk2 = 1
-                    break
-
-            elif s[start] == s[end]:
-                start += 1
-                end -= 1
+    start = 0
+    end = len(s) - 1
 
 
+    while start <= end:
+        if s[start] == s[end]:
+            start += 1
+            end -= 1
+        else:
+            # 오른쪽 문자 제거 후 회문 검사
+            temp1 = s[:end] + s[end+1:]
+            # 왼쪽 문자 제거 후 회문 검사
+            temp2 = s[:start] + s[start+1:]
 
-    # 홀수
-    elif len(s) % 2 == 1:
-           target_index= len(s) // 2
-           start = 0
-           end = len(s)-1
-           while start != target_index and end != target_index:
-               if s[start] != s[end]:
-                   if s[start + 1] == s[end]:
-                       end -= 1
-                       start += 2
-                       chk += 1
-
-
-
-                   elif s[start] == s[end + 1]:
-                       end -= 2
-                       start += 1
-                       chk += 1
-                   else:
-                       chk2 = 1
-                       break
-
-               elif s[start] == s[end]:
-                   start += 1
-                   end -= 1
-
-
-    if chk == 1:
-
-        print(1)
-
+            if temp1 == temp1[::-1] or temp2 == temp2[::-1]:
+                print(1)  # 유사회문인 경우
+                break
+            else:
+                print(2)  # 회문도, 유사회문도 아닌 경우
+                break
     else:
-        print(chk)
+        print(0)  # 회문인 경우
