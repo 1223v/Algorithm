@@ -1,58 +1,39 @@
 import heapq
 def solution(n, s, a, b, fares):
     answer = 0
-    distance = [(float('inf'))] * (n+1)
-    graph = [[] for _ in range(n+1)]
-    result = [[] for _ in range(n+1)]
-
+    graph=[[] for _ in range(n+1)]
     for start, end, cost in fares:
         graph[start].append((end,cost))
-        graph[end].append((start,cost))
-
-
+        graph[end].append((start, cost))
 
     def dijkstra(start):
-        hq =[]
+        hq = []
+        distance = [float('inf')] * (n+1)
+
         distance[start] = 0
-        heapq.heappush(hq,(0, start))
+        heapq.heappush(hq,(0,start))
 
         while hq:
             dist, now_node = heapq.heappop(hq)
 
-            if distance[now_node] > dist:
-                continue
-
             for next_node, cost in graph[now_node]:
-                if distance[next_node] > cost + dist:
-                    result[next_node].append((now_node,cost))
-                    distance[next_node] = cost + dist
+                if distance[next_node] > dist+cost:
+                    distance[next_node] = dist + cost
                     heapq.heappush(hq,(dist+cost, next_node))
 
-        print(result)
-        print(distance)
+        return distance
 
-        res = set()
-        ak = a
-        bk = b
+    origin_distance = dijkstra(s)
+    result = origin_distance[a] + origin_distance[b]
 
-        while ak != start and bk != start:
+    for i in range(n+1):
+        if i == s:
+            continue
+        else:
+            ab_distance=dijkstra(i)
+            result = min(result, origin_distance[i] + ab_distance[a] + ab_distance[b])
 
-
-            res.add(result[ak][0])
-            res.add(result[bk][0])
-            ak = result[ak][0][0]
-            bk = result[bk][0][0]
-
-        total = 0
-        res_lst = list(res)
-        print(res_lst)
-        for i in range(len(res_lst)):
-            total += res_lst[i][1]
-
-        return total
+    return result
 
 
-
-    return dijkstra(s)
-
-print(solution(6,	4,	6,	2,	[[4, 1, 10], [3, 5, 24], [5, 6, 2], [3, 1, 41], [5, 1, 24], [4, 6, 50], [2, 4, 66], [2, 3, 22], [1, 6, 25]]))
+print(solution(6,4,6,2,	[[4, 1, 10], [3, 5, 24], [5, 6, 2], [3, 1, 41], [5, 1, 24], [4, 6, 50], [2, 4, 66], [2, 3, 22], [1, 6, 25]]))
