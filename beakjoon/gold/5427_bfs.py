@@ -49,6 +49,7 @@ for _ in range(TC):
                     if fire_time[ni][nj] == -1 or visited[ci][cj] + 1 < fire_time[ni][nj]:
                         visited[ni][nj] = visited[ci][cj] + 1
                         person_queue.append((ni, nj))
+                        
         return "IMPOSSIBLE"
 
 
