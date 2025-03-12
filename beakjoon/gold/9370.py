@@ -100,21 +100,17 @@ for _ in range(TC):
     H_start = dijkstra2(S,H) + tmp
     result = []
 
+    H_to_i = dijkstra(H)
+    G_to_i = dijkstra(G)
 
-    print(origin_distance)
-    print(G_start)
-    print(H_start)
 
     for i in t_lst:
 
-        if origin_distance[i] >= int(1e9):
-            continue
 
-
-        if G_start + dijkstra1(G,i) == origin_distance[i]:
+        if G_start + H_to_i[i] == origin_distance[i]:
             result.append(i)
 
-        elif H_start + dijkstra1(H,i) == origin_distance[i]:
+        elif H_start + G_to_i[i] == origin_distance[i]:
             result.append(i)
 
     result.sort()

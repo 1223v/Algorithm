@@ -5,7 +5,7 @@ input = sys.stdin.readline
 TC = int(input())
 
 def bf():
-    dist[1] = 0
+
     for i in range(N):
         for j in range(len(edges)):
             start, end, time_value = edges[j]

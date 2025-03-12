@@ -7,19 +7,7 @@ s = list(map(int,input().split()))
 
 start = 0
 end = len(s)-1
-
-first_tmp = abs(s[start] + s[end])
-left_idx = start
-right_idx = end
-
-while start < end:
-
-    tmp = s[start] + s[end]
-
-    if abs(tmp) < first_tmp:
-        left_idx=start
-        right_idx = end
-        first_tmp = abs(tmp)
+#https://www.acmicpc.net/problem/2467
 
         if first_tmp == 0:
             break

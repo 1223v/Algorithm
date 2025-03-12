@@ -11,13 +11,15 @@ for i in range(N-2):
 
     start = i + 1
     end = N-1
+    #print(tmp1, abs(s[start] + s[end] + s[i])," ", )
+    tmp1 = min(abs(s[start] + s[end] + s[i]),tmp1)
 
 
     while start < end:
 
         tmp2 = s[start] + s[end] + s[i]
 
-        if abs(tmp2) < tmp1:
+        if abs(tmp2) <= tmp1:
 
             right = end
             left = start

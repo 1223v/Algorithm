@@ -28,7 +28,6 @@ def dijkstra(start):
 
             if distance[next] > cost+dist:
                 parent[next] = now
-                print(now, next)
 
                 distance[next] = cost+dist
                 heapq.heappush(hq,(cost+dist, next))
@@ -43,4 +42,4 @@ for i in distance:
 
 print(count)
 for i in range(2, N + 1):
-    print(i, parent[i])
+    print(parent[i],i)

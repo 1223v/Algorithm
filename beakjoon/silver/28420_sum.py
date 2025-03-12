@@ -8,7 +8,7 @@ s_sum = [[0] * (M+1) for _ in range(N+1)]
 
 for i in range(1, N+1):
     for j in range(1, M+1):
-        s_sum[i][j] = s_sum[i][j-1] +s_sum[i-1][j] - s_sum[i-1][j-1] + s[i][j]
+        s_sum[i][j] = s_sum[i][j-1] + s_sum[i-1][j] - s_sum[i-1][j-1] + s[i][j]
 
 def prefix_sum(x1,y1,x2,y2):
     return s_sum[x2][y2] - s_sum[x1-1][y2] - s_sum[x2][y1-1] + s_sum[x1-1][y1-1]
