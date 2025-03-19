@@ -15,10 +15,11 @@ def DFS(L, idx):
         B = 0
         for i in range(N):
             for j in range(N):
-                if visited[i] and visited[j]:
-                    A += board[i][j]
-                elif not visited[i] and not visited[j]:
-                    B += board[i][j]
+                if i!=j:
+                    if visited[i] and visited[j]:
+                        A += board[i][j]
+                    elif not visited[i] and not visited[j]:
+                        B += board[i][j]
         res = min(res, abs(A-B))
         return
     for i in range(idx, N):

@@ -19,3 +19,4 @@ for i in range(N*2-K):
     max_value = max(max_value, S[i+K] - S[i])
 
 print(max_value)
+

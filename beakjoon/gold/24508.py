@@ -30,7 +30,7 @@ while start < end:
         print("NO")
         exit()
 
-if all(x == 0 for x in s):
+if all(x == 0 or x==K for x in s):
     print("YES")
 else:
     print("NO")

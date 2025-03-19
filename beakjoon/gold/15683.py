@@ -2,55 +2,57 @@ import sys
 input = sys.stdin.readline
 
 N,M = map(int,input().split())
-graph = [[6] * (M+2)] + [[6] + list(map(int,input().split())) + [6] for _ in range(N)] + [[6] * (M+2)]
+s = [[6] * (M+2)] + [[6] + list(map(int,input().split())) + [6] for _ in range(N)] + [[6] * (M+2)]
 
 lst = []
 min_value = float('inf')
-cctv = [[],[1], [1,3], [0,1], [0,1,3], [0,1,2,3]]
-
+cctv = [[],[1], [1,3], [0,1], [0,1,3],[0,1,2,3]]
 di = [0,1,0,-1]
 dj = [1,0,-1,0]
+
 
 def cal(tlst):
     visited = [[0] * (M+2) for _ in range(N+2)]
     for i in range(len(lst)):
         si,sj = lst[i]
         rot = tlst[i]
-        ans = graph[si][sj]
+        ans = s[si][sj]
 
         for j in cctv[ans]:
             ci,cj = si,sj
-            j = (j+rot) %4
+            j = (j + rot) % 4
             while True:
-                ci,cj = ci + di[j], cj + dj[j]
+                ci = ci + di[j]
+                cj = cj + dj[j]
 
-                if graph[ci][cj] == 6:
+                if s[ci][cj] == 6:
                     break
                 visited[ci][cj] = 1
+
     count = 0
     for i in range(1,N+1):
         for j in range(1,M+1):
-            if graph[i][j] ==0 and visited[i][j] == 0:
+            if s[i][j] == 0 and visited[i][j] == 0:
                 count += 1
-
     return count
 
-
-def dfs(n,tlst):
+def dfs(n, tlst):
     global min_value
-
     if n == len(lst):
         min_value = min(min_value, cal(tlst))
+        return
 
     dfs(n+1, tlst + [0])
-    dfs(n + 1, tlst + [1])
-    dfs(n + 1, tlst + [2])
-    dfs(n + 1, tlst + [3])
+    dfs(n+1, tlst + [1])
+    dfs(n+1, tlst + [2])
+    dfs(n+1, tlst + [3])
 
 for i in range(1,N+1):
-    for j in range(1, M+1):
-        if 1 <= graph[i][j] < 6:
+    for j in range(1,M+1):
+        if 1 <= s[i][j] < 6:
             lst.append((i,j))
+
+
 dfs(0,[])
 
 print(min_value)
