@@ -14,14 +14,14 @@ commands = list(map(int,input().split()))
 def rotation_board(L):
 
     total_L = 2**L
-    tmp = deepcopy(graph)
+    tmp = [[0] * total_N for _ in range(total_N)]
 
-    tmp_value = 0
-    for k in range(total_L,total_N+1, total_L):
-        for i in range(tmp_value,k):
-            for j in range(tmp_value,k):
-                tmp[j][k-1-i] = graph[i][j]
-        tmp_value = k
+    for start_i in range(0, total_N, total_L):
+        for start_j in range(0,total_N, total_L):
+            for i in range(total_L):
+                for j in range(total_L):
+                    tmp[start_i+j][start_j+(total_L-1-i)] = graph[start_i+i][start_j+j]
+
 
     return tmp
 
@@ -42,9 +42,10 @@ def melt_ice(tmp_graph):
                 demo_graph[i][j] += 1
 
 
+
     for i in range(total_N):
         for j in range(total_N):
-            if tmp_graph[i][j] > demo_graph[i][j]:
+            if tmp_graph[i][j] >= demo_graph[i][j]:
                 tmp_graph[i][j] -= demo_graph[i][j]
             else:
                 tmp_graph[i][j] = 0
@@ -54,6 +55,8 @@ def melt_ice(tmp_graph):
 
 
 def check_size(i,j):
+
+
     queue =deque()
 
     queue.append((i,j))
@@ -74,10 +77,10 @@ def check_size(i,j):
     return ice_count
 
 for L in commands:
-
-
     tmp_graph = rotation_board(L)
     graph = melt_ice(tmp_graph)
+
+
 
 result = 0
 max_value = 0
